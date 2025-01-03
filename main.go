@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main () {
 	word := "golang"
@@ -8,6 +11,7 @@ func main () {
 	currentWordState := initializeCurrentWordState(word)
 
 	fmt.Println("Welcome to Hangman in Go!")
+	displayCurrentWordState(currentWordState, attempts)
 }
 
 func initializeCurrentWordState(word string) []string {
@@ -19,4 +23,9 @@ func initializeCurrentWordState(word string) []string {
 	}
 
 	return currentWordState
+}
+
+func displayCurrentWordState(currentWordState []string, attempts int) {
+	fmt.Println("Current Word State:", strings.Join(currentWordState, " "))
+	fmt.Println("Attempts Left:", attempts)
 }
