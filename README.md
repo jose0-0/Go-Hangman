@@ -25,7 +25,7 @@ There is no additional steps required to run the game. You can simply do the fol
 
 1. run command `go run ./` in the CLI
 
-### Key Features in Go Implementation
+## Key Features in Go Implementation
 
 1. Word Selection
 
