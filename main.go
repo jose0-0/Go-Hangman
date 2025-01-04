@@ -6,10 +6,17 @@ import (
 	"os"
 	"strings"
 	"unicode/utf8"
+
+	"golang.org/x/exp/rand"
 )
 
-func main () {
-	word := "golang"
+func main() {
+	word, err := getRandomWord("words.txt") //
+	if err != nil {
+		fmt.Println("Error reading word file:", err)
+		return
+	}
+
 	attempts := 6
 	currentWordState := initializeCurrentWordState(word)
 	scanner := bufio.NewScanner(os.Stdin)
@@ -40,7 +47,32 @@ func main () {
 
 		displayHangman(6 - attempts)
 
+		if isWordGuessed(currentWordState, word) {
+			fmt.Println("Congratulations! You've guessed the word!")
+			return
+		}
+
+		if attempts == 0 {
+			fmt.Println("Game Over! The word was:", word)
+			return
+		}
+
 	}
+}
+
+func getRandomWord(fileName string) (string, error) {
+	data, err := os.ReadFile(fileName)
+	if err != nil {
+		return "", err
+	}
+
+	words := strings.Split(string(data), "\n")
+
+	return words[rand.Intn(len(words))], nil
+}
+
+func isWordGuessed(guessed []string, word string) bool {
+	return strings.Join(guessed, "") == word
 }
 
 func displayHangman(incorrectGuesses int) {
