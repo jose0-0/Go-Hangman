@@ -3,11 +3,10 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"math/rand"
 	"os"
 	"strings"
 	"unicode/utf8"
-
-	"golang.org/x/exp/rand"
 )
 
 func main() {
@@ -95,7 +94,7 @@ func updateGuessed(word string, guessed []string, letter string) bool {
 	return correctGuess
 }
 
-func isValidInput (input string) bool {
+func isValidInput(input string) bool {
 	// returns the amount of runes in a string
 	return utf8.RuneCountInString(input) == 1
 }
